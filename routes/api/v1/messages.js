@@ -12,4 +12,6 @@ router.get("/", messagesController.index);
 router.post("/", messagesController.create);
 //get message by id
 router.get("/:id", messagesController.getMessageById);
+
+//delete message by id
 module.exports = router;
