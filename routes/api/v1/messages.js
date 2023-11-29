@@ -12,7 +12,8 @@ router.get("/", messagesController.index);
 router.post("/", messagesController.create);
 //get message by id
 router.get("/:id", messagesController.getMessageById);
-
+//put messages by id
+router.put("/:id", messagesController.putMessageById);
 //delete message by id
 router.delete("/:id", messagesController.deleteMessageById);
 

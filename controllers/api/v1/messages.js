@@ -14,18 +14,22 @@ const index = async (req, res) => {
     });
 };
 
+//create message with username and message
 const create = async (req, res) => {
+    let username = req.body.username;
     let message = req.body.message;
     let m = new Message();
+    m.username = username;
     m.message = message;
     await m.save();
 
     res.json({
         status: "success",
-        message: "POST a new message",
+        message: "POSTING a new message",
         data: [
             {
-                message: m,
+                username: username,
+                message: message,
             },
         ],
     });
@@ -35,9 +39,26 @@ const create = async (req, res) => {
 const getMessageById = async (req, res) => {
     let id = req.params.id;
     let message = await Message.findById(id);
+    let username = message.username;
     res.json({
         status: "success",
         message: "GETTING message by id",
+        data: [
+            {
+                username: username,
+                message: message,
+            },
+        ],
+    });
+}
+
+//put messages by id
+const putMessageById = async (req, res) => {
+    let id = req.params.id;
+    let message = await Message.findById(id);
+    res.json({
+        status: "success",
+        message: "PUT message by id",
         data: [
             {
                 message: message,
@@ -45,8 +66,6 @@ const getMessageById = async (req, res) => {
         ],
     });
 }
-
-
 
 
 //delete message by id
@@ -65,7 +84,11 @@ const deleteMessageById = async (req, res) => {
 }
 
 module.exports.index = index;
+
 module.exports.create = create;
+
 module.exports.getMessageById = getMessageById;
+
+module.exports.putMessageById = putMessageById;
 
 module.exports.deleteMessageById = deleteMessageById;
