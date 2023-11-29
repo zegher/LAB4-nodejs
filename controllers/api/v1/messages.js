@@ -46,9 +46,26 @@ const getMessageById = async (req, res) => {
     });
 }
 
-//update message by id
+
+
 
 //delete message by id
+const deleteMessageById = async (req, res) => {
+    let id = req.params.id;
+    let message = await Message.findByIdAndDelete(id);
+    res.json({
+        status: "success",
+        message: "DELETE message by id",
+        data: [
+            {
+                message: message,
+            },
+        ],
+    });
+}
+
 module.exports.index = index;
 module.exports.create = create;
 module.exports.getMessageById = getMessageById;
+
+module.exports.deleteMessageById = deleteMessageById;
