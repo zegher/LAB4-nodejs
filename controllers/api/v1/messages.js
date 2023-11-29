@@ -3,6 +3,7 @@ const Message = require("../../../models/Message");
 
 const index = async (req, res) => {
     let messages = await Message.find({});
+    let user = await Message.find({ user: "user" });
     res.json({
         status: "success",
         message: "GETTING messages",
@@ -15,11 +16,10 @@ const index = async (req, res) => {
 };
 
 //create message with username and message
-const create = async (req, res) => {
-    let username = req.body.username;
+const create = async (req, res) => {;
     let message = req.body.message;
     let m = new Message();
-    m.username = username;
+    m.user = req.body.user;
     m.message = message;
     await m.save();
 
@@ -28,7 +28,7 @@ const create = async (req, res) => {
         message: "POSTING a new message",
         data: [
             {
-                username: username,
+                user: m.user,
                 message: message,
             },
         ],
@@ -39,13 +39,12 @@ const create = async (req, res) => {
 const getMessageById = async (req, res) => {
     let id = req.params.id;
     let message = await Message.findById(id);
-    let username = message.username;
+
     res.json({
         status: "success",
         message: "GETTING message by id",
         data: [
             {
-                username: username,
                 message: message,
             },
         ],
