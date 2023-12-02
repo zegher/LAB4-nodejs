@@ -83,11 +83,7 @@ const deleteMessageById = async (req, res) => {
 }
 
 module.exports.index = index;
-
 module.exports.create = create;
-
 module.exports.getMessageById = getMessageById;
-
 module.exports.putMessageById = putMessageById;
-
 module.exports.deleteMessageById = deleteMessageById;
