@@ -12,6 +12,7 @@ const index = async (req, res) => {
             message: "GETTING messages for user " + user,
             data: [
                 {
+                    user: user,
                     messages: messages,
                 },
             ],
@@ -25,6 +26,7 @@ const index = async (req, res) => {
             message: "GET all messages",
             data: [
                 {
+                    user: "all",
                     messages: messages,
                 },
             ],
