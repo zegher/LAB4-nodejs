@@ -56,18 +56,26 @@ const create = async (req, res) => {;
 
 //get message by id
 const getMessageById = async (req, res) => {
-    let id = req.params.id;
-    let message = await Message.findById(id);
+    try {
+        let id = req.params.id;
+        let message = await Message.findById(id);
 
-    res.json({
-        status: "success",
-        message: "GETTING message by id",
-        data: [
-            {
-                message: message,
-            },
-        ],
-    });
+        res.json({
+            status: "success",
+            message: "GETTING message by id",
+            data: [
+                {
+                    message: message,
+                },
+            ],
+        });
+    } catch (err) {
+        res.json({
+            status: "error",
+            message: "The ID doesn't exist",
+            data: err,
+        });
+    }
 }
 
 //put messages by id
