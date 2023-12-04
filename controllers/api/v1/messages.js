@@ -80,39 +80,57 @@ const getMessageById = async (req, res) => {
 
 //put messages by id
 const putMessageById = async (req, res) => {
-    let id = req.params.id;
-    let message = await Message.findById(id);
+    try{
+        let id = req.params.id;
+        let message = await Message.findById(id);
 
-    if(req.body.user) m.user = req.body.user;
-    if(req.body.message) m.message = req.body.message;
-    await m.save();
+        if(req.body.user) m.user = req.body.user;
+        if(req.body.message) m.message = req.body.message;
+        await m.save();
 
-    res.json({
-        status: "success",
-        message: "PUT message by id",
-        data: [
-            {
-                user: m.user,
-                message: m.message,
-            },
-        ],
-    });
+        res.json({
+            status: "success",
+            message: "PUT message by id",
+            data: [
+                {
+                    user: m.user,
+                    message: m.message,
+                },
+            ],
+        });
+    }
+    catch(err){
+        res.json({
+            status: "error",
+            message: "Put message doesn't work",
+            data: err,
+        });
+    }
 }
 
 
 //delete message by id
 const deleteMessageById = async (req, res) => {
-    let id = req.params.id;
-    let message = await Message.findByIdAndDelete(id);
-    res.json({
-        status: "success",
-        message: "DELETE message by id",
-        data: [
-            {
-                message: message,
-            },
-        ],
-    });
+    try{
+        let id = req.params.id;
+        let message = await Message.findByIdAndDelete(id);
+        res.json({
+            status: "success",
+            message: "DELETE message by id",
+            data: [
+                {
+                    message: message,
+                },
+            ],
+        });
+    }
+    catch(err){
+        res.json({
+            status: "error",
+            message: "Delete message doesn't work",
+            data: err,
+        });
+    }
 }
 
 
