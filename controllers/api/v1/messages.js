@@ -91,8 +91,6 @@ const putMessageById = async (req, res) => {
     });
 }
 
-//put messages by id
-
 
 //delete message by id
 const deleteMessageById = async (req, res) => {
