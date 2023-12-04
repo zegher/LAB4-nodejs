@@ -2,17 +2,36 @@
 const Message = require("../../../models/Message");
 
 const index = async (req, res) => {
-    let messages = await Message.find({});
-    let user = await Message.find({ user: "user" });
-    res.json({
-        status: "success",
-        message: "GETTING messages",
-        data: [
-            {
-                messages: messages,
-            },
-        ],
-    });
+
+    if (req.query.user) {
+
+        let user = req.query.user;
+        let messages = await Message.find({ user: user });
+        res.json({
+            status: "success",
+            message: "GETTING messages for user " + user,
+            data: [
+                {
+                    messages: messages,
+                },
+            ],
+        });
+
+    } else {
+
+        let messages = await Message.find({});
+        res.json({
+            status: "success",
+            message: "GET all messages",
+            data: [
+                {
+                    messages: messages,
+                },
+            ],
+        });
+
+    }
+
 };
 
 //create message with username and message
@@ -81,6 +100,7 @@ const deleteMessageById = async (req, res) => {
         ],
     });
 }
+
 
 module.exports.index = index;
 module.exports.create = create;
