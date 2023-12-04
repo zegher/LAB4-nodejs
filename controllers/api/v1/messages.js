@@ -74,16 +74,24 @@ const getMessageById = async (req, res) => {
 const putMessageById = async (req, res) => {
     let id = req.params.id;
     let message = await Message.findById(id);
+
+    if(req.body.user) m.user = req.body.user;
+    if(req.body.message) m.message = req.body.message;
+    await m.save();
+
     res.json({
         status: "success",
         message: "PUT message by id",
         data: [
             {
-                message: message,
+                user: m.user,
+                message: m.message,
             },
         ],
     });
 }
+
+//put messages by id
 
 
 //delete message by id
@@ -100,6 +108,7 @@ const deleteMessageById = async (req, res) => {
         ],
     });
 }
+
 
 
 module.exports.index = index;
