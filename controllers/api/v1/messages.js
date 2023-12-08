@@ -38,9 +38,11 @@ const index = async (req, res) => {
 
 //create message with username and message
 const create = async (req, res) => {;
+    let text = await Message.findById(id);
 
-    const { user, text } = req.body.message;
-
+    if(req.body.user) m.user = req.body.user;
+    if(req.body.message) m.message = req.body.message;
+    await m.save();
     const newMessage = new Message({
         user,
         text,
@@ -117,11 +119,12 @@ const getMessageById = async (req, res) => {
 const putMessageById = async (req, res) => {
     try{
         let id = req.params.id;
-        let text = await Message.findById(id);
+        let message = await Message.findById(id);
 
-        if(req.body.user) m.user = req.body.user;
-        if(req.body.message) m.message = req.body.message;
-        await m.save();
+        // Update the correct property based on your schema
+        if(req.body.user) message.user = req.body.user;
+        if(req.body.message) message.message = req.body.message;
+        await message.save();
 
         res.json({
             status: "success",
