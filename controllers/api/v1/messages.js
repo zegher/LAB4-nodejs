@@ -105,7 +105,7 @@ const putMessageById = async (req, res) => {
             data: [
                 {
                     user: m.user,
-                    message: m.message,
+                    text: m.message,
                 },
             ],
         });
