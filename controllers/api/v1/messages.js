@@ -51,7 +51,7 @@ const create = async (req, res) => {;
             data: [
                 {
                     user: m.user,
-                    message: message,
+                    message: m.message,
                 },
             ],
         });
@@ -93,7 +93,7 @@ const getMessageById = async (req, res) => {
 const putMessageById = async (req, res) => {
     try{
         let id = req.params.id;
-        let message = await Message.findById(id);
+        let text = await Message.findById(id);
 
         if(req.body.user) m.user = req.body.user;
         if(req.body.message) m.message = req.body.message;
@@ -104,7 +104,7 @@ const putMessageById = async (req, res) => {
             message: "PUT message by id",
             data: [
                 {
-                    user: m.user,
+                    user: m.user.username,
                     text: m.message,
                 },
             ],
