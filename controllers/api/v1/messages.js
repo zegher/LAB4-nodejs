@@ -38,32 +38,23 @@ const index = async (req, res) => {
 
 //create message with username and message
 const create = async (req, res) => {;
-    let text = await Message.findById(id);
-
-    if(req.body.user) m.user = req.body.user;
-    if(req.body.message) m.message = req.body.message;
+    let user = req.body.user;
+    let text = req.body.message;
+    let m = new Message();
+    m.user = user;
+    m.message = text;
     await m.save();
-    const newMessage = new Message({
-        user,
-        text,
-    });
 
-    try {
-        const message = await newMessage.save();
-        res.json({
-            status: "success",
-            message: `POSTING a new message for user ${user}`,
-            data: {
-                user: user,
-                message,
+    res.json({
+        status: "success",
+        message: "POSTING a new message",
+        data: [
+            {
+                user: m.user,
+                text: m.message,
             },
-        });
-    } catch (err) {
-        res.status(500).json({
-            status: "error",
-            message: "Failed to post message",
-        });
-    }
+        ],
+    });
     // try{
     //     let message = req.body.message;
     //     let m = new Message();
