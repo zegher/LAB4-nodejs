@@ -52,13 +52,14 @@ const create = async (req, res) => {;
             status: "success",
             message: `POSTING a new message for user ${user}`,
             data: {
+                user: user,
                 message,
             },
         });
     } catch (err) {
         res.status(500).json({
             status: "error",
-            message: "Failed to save message",
+            message: "Failed to post message",
         });
     }
     // try{
