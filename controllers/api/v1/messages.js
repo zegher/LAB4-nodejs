@@ -39,10 +39,10 @@ const index = async (req, res) => {
 //create message with username and message
 const create = async (req, res) => {;
     try{
-        let text = req.body.message;
+        let message = req.body.message;
         let m = new Message();
         m.user = req.body.user;
-        m.text = text;
+        m.message = message;
         await m.save();
     
         res.json({
@@ -51,7 +51,7 @@ const create = async (req, res) => {;
             data: [
                 {
                     user: m.user,
-                    text: m.text, //message: message
+                    text: m.message, //message: message
                 },
             ],
         });
