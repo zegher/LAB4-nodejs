@@ -51,7 +51,7 @@ const create = async (req, res) => {;
             data: [
                 {
                     user: m.user,
-                    message: m.message,
+                    message: m.message, //message: message
                 },
             ],
         });
