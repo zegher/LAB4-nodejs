@@ -50,7 +50,7 @@ const create = async (req, res) => {;
             message: "POSTING a new message",
             data: [
                 {
-                    user: m.user,
+                    user: m.user.username,
                     text: m.message, //message: message
                 },
             ],
